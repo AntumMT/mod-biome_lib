@@ -35,7 +35,11 @@ biome_lib.queue_run_ratio = tonumber(minetest.settings:get("biome_lib_queue_run_
 -- Boilerplate to support localized strings if intllib mod is installed.
 local S
 if minetest.global_exists("intllib") then
-	S = intllib.Getter()
+	if intllib.make_gettext_pair then
+		S = intllib.make_gettext_pair()
+	else
+		S = intllib.Getter()
+	end
 else
 	S = function(s) return s end
 end
